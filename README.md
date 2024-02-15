@@ -21,7 +21,8 @@ Em seu desenvolvimento foram feitas as seguintes implementações:
 
 - Chamada ao MethodChannel para execução de uma função nativa
 - Chamada ao MethodChannel para execução de uma função nativa passando parâmetros
-- Chamata ao EventChannel para execução de uma função nativa que retorna um Stream
+- Chamada ao EventChannel para execução de uma função nativa que retorna um Stream
+- Chamada ao BasicMessageChannel para execução de uma função nativa que retorna um Stream semelhante a uma função com retorno do tipo Future
 
 ## Platform Channel
 
