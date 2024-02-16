@@ -33,10 +33,13 @@ public class ExemploMethodChannel {
           public void onMethodCall(MethodCall call, Result result) {
             if ("getHelloWorld".equals(call.method)) {
               String message = call.argument("message");
-              if (message == null) {
-                result.success("Exemplo de MethodChannel");
+
+              System.out.println("Mensagem recebida: " + message);
+
+              if (message == null || message=="") {
+                result.success("Ola, este e um exemplo de retorno do MethodChannel");
               } else {
-                result.success("Exemplo de MethodChannel, Texto Concatenado -> " + message);
+                result.success("Ola [" + message + "], este e um exemplo de retorno do MethodChannel");
                 new MethodChannel(
                   flutterEngine.getDartExecutor().getBinaryMessenger(),
                   CHANNEL
