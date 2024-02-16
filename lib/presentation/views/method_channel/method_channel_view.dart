@@ -1,55 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_channel/commons/components/custom_appbar.dart';
+import 'package:flutter_channel/presentation/views/method_channel/method_channel_arguments/method_channel_arguments_view.dart';
+import 'package:flutter_channel/presentation/views/method_channel/method_channel_simple/method_channel_simple_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import '../../../infrastructure/services/channels/exempo_method_channel_service.dart'; // import for method channel
+import '../../../commons/style/application_colors.dart';
 
-class MethodChannelWidget extends StatefulWidget {
-  const MethodChannelWidget({super.key});
+class MethodChannelView extends StatefulWidget {
+  const MethodChannelView({super.key});
 
   @override
-  MethodChannelWidgetState createState() => MethodChannelWidgetState();
+  MethodChannelViewState createState() => MethodChannelViewState();
 }
 
-class MethodChannelWidgetState extends State<MethodChannelWidget> {
-  var exemploMethodChannelService = ExemploMethodChannelService();
-  late String _result = '';
-  late String nameRequest;
-
+class MethodChannelViewState extends State<MethodChannelView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Method Channel'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'Method Chaneel Result:',
-                ),
-                Text(
-                  _result,
-                ),
-              ],
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: customAppBar(
+          context: context,
+          title: 'Method Channel',
+          toolbarHeight: 60,
+          centerTitle: true,
+          bottom: TabBar(
+            labelColor: ApplicationColors().branco,
+            labelStyle: GoogleFonts.inter(
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                height: 50,
-                width: 300,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    _result = await exemploMethodChannelService.callSimpleMethodChannel();
-                    setState(() {});
-                  },
-                  child: const Text('Call Method Channel'),
+            tabAlignment: TabAlignment.fill,
+            unselectedLabelColor: ApplicationColors().branco.withAlpha(150),
+            indicatorColor: ApplicationColors().branco,
+            tabs: [
+              Tab(
+                child: Text(
+                  'Method Channel Simple',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.inter(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16,
+                  ),
                 ),
               ),
-            ),
+              Tab(
+                child: Text(
+                  'Method Channel Arguments',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.inter(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        backgroundColor: ApplicationColors().background[10],
+        body: TabBarView(
+          children: [
+            MethodChannelSimpleView(),
+            MethodChannelArgumentsView(),
           ],
         ),
       ),
