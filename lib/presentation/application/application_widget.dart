@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_channel/presentation/views/basic_message_channel/basic_message_channel_view.dart';
-import 'package:flutter_channel/presentation/views/event_channel/event_channel_view.dart';
-import 'package:flutter_channel/presentation/views/method_channel/method_channel_parameter_view.dart';
-import 'package:flutter_channel/presentation/views/method_channel/method_channel_view.dart';
-import '../views/home/home_widget.dart';
+import 'package:flutter_channel/commons/style/application_colors.dart';
+import 'package:flutter_channel/infrastructure/routes/application_routes.dart';
+import 'package:flutter_channel/presentation/application/application_controller.dart';
 
 class ApplicationWidget extends StatefulWidget {
   final String title = 'ApplicationWidget';
@@ -15,22 +13,24 @@ class ApplicationWidget extends StatefulWidget {
 }
 
 class ApplicationWidgetState extends State<ApplicationWidget> {
+  ApplicationController controller = ApplicationController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Exemplo de Utilização do Method Channel',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: ApplicationColors().primaryColor,
+        appBarTheme: AppBarTheme(
+          backgroundColor: ApplicationColors().primaryColor,
+          iconTheme: IconThemeData(
+            color: ApplicationColors().branco,
+          ),
+        ),
       ),
-      routes: {
-        '/': (context) => HomeWidget(),
-        '/method_channel': (context) => MethodChannelWidget(),
-        '/method_channel_parameter': (context) => MethodChannelParameterWidget(),
-        '/event_channel': (context) => EventChannelWidget(),
-        '/basic_message_channel': (context) => BasicMessageChannelWidget(),
-      },
-      initialRoute: '/',
+      routes: applicationRoutes,
+      initialRoute: controller.initialRoute,
     );
   }
 }
