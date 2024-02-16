@@ -11,9 +11,10 @@ class ExemploMethodChannelService {
   Future<String> callSimpleMethodChannel() async =>
       await platform.invokeMethod('getHelloWorld');
 
-  Future<String> callSimpleMethodChannelWithParams(String param) async {
-    if (param.isEmpty) return '';
-    return await platform.invokeMethod('getHelloWorld', {'message': param});
+  Future<String> callSimpleMethodChannelWithParams({String param = ''}) async {
+    if (param.isEmpty) return 'Parâmetro não informado!';
+    return await platform
+        .invokeMethod('getHelloWorld', {'message': param.trim()});
   }
 
   Future<void> _callbackPlatformChannel(MethodCall call) async {

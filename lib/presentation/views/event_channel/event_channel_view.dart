@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../infrastructure/services/channels/exempo_event_channel_service.dart';
 
@@ -13,7 +14,8 @@ class EventChannelWidget extends StatefulWidget {
 
 class EventChannelWidgetState extends State<EventChannelWidget> {
   var exemploEventChannelService = ExemploEventChannelService();
-  final TextEditingController _controller = TextEditingController(text: 'Nome do Evento');
+  final TextEditingController _controller =
+      TextEditingController(text: 'Nome do Evento');
 
   late StreamSubscription<dynamic> streamSubscription;
   String eventData = '';
@@ -23,7 +25,8 @@ class EventChannelWidgetState extends State<EventChannelWidget> {
     super.initState();
 
     // Inscrevo o stream
-    streamSubscription = exemploEventChannelService.receiveBroadcastStream().listen((event) {
+    streamSubscription =
+        exemploEventChannelService.receiveBroadcastStream().listen((event) {
       setState(() {
         eventData = event;
       });
@@ -42,8 +45,31 @@ class EventChannelWidgetState extends State<EventChannelWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Event Channel'),
+        toolbarHeight: 100,
+        title: Column(
+          children: [
+            Text(
+              'Event Channel',
+              style: GoogleFonts.inter(
+                fontWeight: FontWeight.w400,
+                fontSize: 24,
+                color: Colors.white,
+              ),
+            ),
+            Text(
+              'Retornando Stream do Android Nativo',
+              softWrap: true,
+              style: GoogleFonts.inter(
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: Colors.green[800],
         centerTitle: true,
+        elevation: 2, // Remover sombra do AppBar
       ),
       body: Center(
         child: Column(

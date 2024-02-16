@@ -13,7 +13,33 @@ class MethodChannelView extends StatefulWidget {
   MethodChannelViewState createState() => MethodChannelViewState();
 }
 
-class MethodChannelViewState extends State<MethodChannelView> {
+class MethodChannelViewState extends State<MethodChannelView>
+    with SingleTickerProviderStateMixin {
+  final PageController _pageController =
+      PageController(); // Adicione um PageController
+
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(
+        _handleTabChange); // Adicione um listener para capturar mudanças de aba
+  }
+
+  @override
+  void dispose() {
+    _tabController
+        .dispose(); // Descarte o TabController para evitar vazamentos de memória
+    super.dispose();
+  }
+
+  void _handleTabChange() {
+    _pageController.jumpToPage(_tabController
+        .index); // Altere a página do PageView de acordo com a aba selecionada
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -30,6 +56,15 @@ class MethodChannelViewState extends State<MethodChannelView> {
               fontWeight: FontWeight.w400,
               fontSize: 16,
             ),
+            controller: _tabController,
+            physics: NeverScrollableScrollPhysics(),
+            dividerColor: ApplicationColors().primaryColor,
+            indicatorWeight: 1,
+            indicatorSize: TabBarIndicatorSize.label,
+            indicatorPadding: const EdgeInsets.all(0),
+            automaticIndicatorColorAdjustment: false,
+            overlayColor:
+                MaterialStateProperty.all(ApplicationColors().primaryColor),
             tabAlignment: TabAlignment.fill,
             unselectedLabelColor: ApplicationColors().branco.withAlpha(150),
             indicatorColor: ApplicationColors().branco,
@@ -58,10 +93,18 @@ class MethodChannelViewState extends State<MethodChannelView> {
           ),
         ),
         backgroundColor: ApplicationColors().background[10],
-        body: TabBarView(
+        body: PageView(
+          physics: NeverScrollableScrollPhysics(),
+          controller: _pageController,
           children: [
-            MethodChannelSimpleView(),
-            MethodChannelArgumentsView(),
+            FadeTransition(
+              opacity: AlwaysStoppedAnimation(1),
+              child: MethodChannelSimpleView(),
+            ),
+            FadeTransition(
+              opacity: AlwaysStoppedAnimation(1),
+              child: MethodChannelArgumentsView(),
+            ),
           ],
         ),
       ),

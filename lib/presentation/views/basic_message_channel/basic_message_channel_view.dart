@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../infrastructure/services/channels/exemplo_basic_message_channel_service.dart';
 
@@ -7,7 +8,8 @@ class BasicMessageChannelWidget extends StatefulWidget {
   BasicMessageChannelWidget({super.key});
 
   @override
-  State<BasicMessageChannelWidget> createState() => _BasicMessageChannelWidgetState();
+  State<BasicMessageChannelWidget> createState() =>
+      _BasicMessageChannelWidgetState();
 }
 
 class _BasicMessageChannelWidgetState extends State<BasicMessageChannelWidget> {
@@ -17,7 +19,31 @@ class _BasicMessageChannelWidgetState extends State<BasicMessageChannelWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Basic Channel Demo'),
+        toolbarHeight: 100,
+        title: Column(
+          children: [
+            Text(
+              'Basic Message Channel',
+              style: GoogleFonts.inter(
+                fontWeight: FontWeight.w400,
+                fontSize: 24,
+                color: Colors.white,
+              ),
+            ),
+            Text(
+              'Retornando uma Future do Android Nativo',
+              softWrap: true,
+              style: GoogleFonts.inter(
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: Colors.green[800],
+        centerTitle: true,
+        elevation: 2, // Remover sombra do AppBar
       ),
       body: Center(
         child: Column(
@@ -41,7 +67,8 @@ class _BasicMessageChannelWidgetState extends State<BasicMessageChannelWidget> {
                           (snapshot.error as PlatformException).message!,
                         ),
                       );
-                    } else if (snapshot.connectionState == ConnectionState.done) {
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.done) {
                       return Padding(
                         padding: EdgeInsets.all(20),
                         child: Image.memory(

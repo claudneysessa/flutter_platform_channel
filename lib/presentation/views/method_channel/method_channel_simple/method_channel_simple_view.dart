@@ -17,8 +17,16 @@ class MethodChannelSimpleViewState extends State<MethodChannelSimpleView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ApplicationColors().background[10],
-      body: Padding(
+      backgroundColor: ApplicationColors().primaryColor,
+      body: Container(
+        margin: const EdgeInsets.only(top: 10),
+        decoration: BoxDecoration(
+          color: ApplicationColors().background[10],
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15),
+            topRight: Radius.circular(15),
+          ),
+        ),
         padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +45,7 @@ class MethodChannelSimpleViewState extends State<MethodChannelSimpleView> {
                         maxLines: 5,
                         softWrap: true,
                         style: GoogleFonts.inter(
-                          fontSize: 17,
+                          fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -68,8 +76,9 @@ class MethodChannelSimpleViewState extends State<MethodChannelSimpleView> {
                         softWrap: true,
                         style: GoogleFonts.inter(
                           fontSize: 16.0,
-                          fontWeight: FontWeight.w400,
-                          color: ApplicationColors().primaryColor,
+                          fontWeight: FontWeight.w600,
+                          color: ApplicationColors().cinza,
+                          fontStyle: FontStyle.italic,
                         ),
                       ),
                     ),
@@ -83,8 +92,9 @@ class MethodChannelSimpleViewState extends State<MethodChannelSimpleView> {
                     child: Center(
                       child: Text(
                         'Resultado da Requisição:',
-                        style: TextStyle(
-                          fontSize: 20.0,
+                        style: GoogleFonts.inter(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
@@ -93,8 +103,11 @@ class MethodChannelSimpleViewState extends State<MethodChannelSimpleView> {
                     child: Text(
                       controller.channelResult,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: GoogleFonts.inter(
                         fontSize: 16.0,
+                        fontWeight: FontWeight.w600,
+                        color: ApplicationColors().primaryColor,
+                        fontStyle: FontStyle.italic,
                       ),
                     ),
                   ),
@@ -121,8 +134,8 @@ class MethodChannelSimpleViewState extends State<MethodChannelSimpleView> {
                 },
                 child: Text(
                   'Executar',
-                  style: TextStyle(
-                    fontSize: 20,
+                  style: GoogleFonts.inter(
+                    fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: ApplicationColors().branco,
                   ),

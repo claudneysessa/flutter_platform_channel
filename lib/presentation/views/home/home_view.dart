@@ -23,43 +23,55 @@ class _HomeViewState extends State<HomeView> {
       appBar: customAppBar(
         title: 'Flutter Platform Channels',
         subtitle: 'Comunicação com Android Nativo',
+        toolbarHeight: 107,
         centerTitle: true,
       ),
-      backgroundColor: ApplicationColors().background[10],
-      body: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: ListView.separated(
-                physics: BouncingScrollPhysics(),
-                itemCount: homeMenuItensList.length,
-                separatorBuilder: (BuildContext context, int index) =>
-                    SizedBox(height: 10),
-                itemBuilder: (
-                  BuildContext context,
-                  int index,
-                ) {
-                  return HomeMenuCard(
-                    title: homeMenuItensList[index]['title'],
-                    subtitle: homeMenuItensList[index]['subtitle'],
-                    icon: homeMenuItensList[index]['icon'],
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        homeMenuItensList[index]['route'],
-                      );
-                    },
-                  );
-                },
+      backgroundColor: ApplicationColors().primaryColor,
+      body: Container(
+        margin: const EdgeInsets.only(top: 10),
+        decoration: BoxDecoration(
+          color: ApplicationColors().background[10],
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15),
+            topRight: Radius.circular(15),
+          ),
+        ),
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: ListView.separated(
+                  physics: BouncingScrollPhysics(),
+                  itemCount: homeMenuItensList.length,
+                  separatorBuilder: (BuildContext context, int index) =>
+                      SizedBox(height: 10),
+                  itemBuilder: (
+                    BuildContext context,
+                    int index,
+                  ) {
+                    return HomeMenuCard(
+                      title: homeMenuItensList[index]['title'],
+                      subtitle: homeMenuItensList[index]['subtitle'],
+                      icon: homeMenuItensList[index]['icon'],
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          homeMenuItensList[index]['route'],
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-          CustomFooter(
-            title: 'Desenvolvido por:',
-            subtitle: 'Claudney Sarti Sessa',
-          ),
-        ],
+            CustomFooter(
+              title: 'Desenvolvido por:',
+              subtitle: 'Claudney Sarti Sessa',
+            ),
+          ],
+        ),
       ),
     );
   }

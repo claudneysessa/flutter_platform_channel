@@ -92,7 +92,7 @@ public class ExemploBasicMessageChannel {
                       reply.reply(imageBytes);
 
                     },
-                    10000
+                    3000
                   );
 
                 } catch (IOException e) {
