@@ -52,6 +52,8 @@ No exemplo de utilização do EventChannel, foi criado um serviço que retorna u
 
 O BasicMessageChannel é um canal de comunicação que permite a chamada de funções nativas que retornam um Stream semelhante a uma função com retorno do tipo Future.
 
+No exemplo de utilização do BasicMessageChannel, foi criado um serviço que retorna uma imagem direto das libs do android simulando uma espera de 10 segundos.
+
 ## Autor
 
 Projeto desenvolvido por Claudney Sarti Sessa
